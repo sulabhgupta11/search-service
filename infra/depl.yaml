@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: search-srv
+  namespace: crackdeal-ns
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: crackdeal
+  template:
+    metadata:
+      labels:
+        app: crackdeal
+    spec:
+      containers:
+      - name: search-srv
+        image: CONTAINER_IMAGE
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: search-srv
+  namespace: crackdeal-ns
+spec:
+  selector:
+    app: crackdeal
+  ports:
+  - port: 8082
+    targetPort: 8082
