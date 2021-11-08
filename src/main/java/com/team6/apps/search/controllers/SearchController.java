@@ -15,7 +15,6 @@ import java.util.List;
 
 
 @RestController
-@RequestMapping("/search")
 @Api(value="Search App", description="Operations pertaining search for Crackdeal")
 public class SearchController {
 
