@@ -4,22 +4,30 @@ import io.swagger.annotations.ApiModelProperty;
 
 public class Product {
 
-	@ApiModelProperty(value="vivo-1", example="vivo-1")
+	@ApiModelProperty(value = "vivo-1", example = "vivo-1")
 	private String id;
 
-	private String productId;
-	
-	@ApiModelProperty(value="vivo", example="vivo")
+	@ApiModelProperty(value = "vivo", example = "vivo")
 	private String name;
-	
-	@ApiModelProperty(value="X60",example="X60")
+
+	@ApiModelProperty(value = "X60", example = "X60")
 	private String description;
-	
-	@ApiModelProperty(value="White", example="White")
+
+	@ApiModelProperty(value = "White", example = "White")
 	private String color;
-	
-	@ApiModelProperty(value="12000", example="12000")
+
+	@ApiModelProperty(value = "12000", example = "12000")
 	private String price;
+
+	@ApiModelProperty(value = "Image url of the product", example = "C:\\Users\\sulgupta\\Desktop\\Crackdeal Images")
+	private String imageUrl;
+
+	@ApiModelProperty(value = "brand", example = "Apple")
+	private String brand;
+
+	@ApiModelProperty(value = "stock", example = "300")
+	private int stock;
+
 
 	public String getId() {
 		return id;
@@ -27,7 +35,6 @@ public class Product {
 
 	public void setId(String id) {
 		this.id = id;
-		this.productId = id;
 	}
 
 	public String getName() {
@@ -62,12 +69,27 @@ public class Product {
 		this.price = price;
 	}
 
-	public String getProductId() {
-		return productId;
+	public String getImageUrl() {
+		return imageUrl;
 	}
 
-	public void setProductId(String productId) {
-		this.productId = productId;
-		this.id = productId;
+	public void setImageUrl(String imageUrl) {
+		this.imageUrl = imageUrl;
+	}
+
+	public String getBrand() {
+		return brand;
+	}
+
+	public void setBrand(String brand) {
+		this.brand = brand;
+	}
+
+	public int getStock() {
+		return stock;
+	}
+
+	public void setStock(int stock) {
+		this.stock = stock;
 	}
 }
