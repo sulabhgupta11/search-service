@@ -1,4 +1,4 @@
-FROM openjdk:8-jdk-alpine
+FROM 911075010171.dkr.ecr.us-east-1.amazonaws.com/openjdk:8-jdk-alpine
 ARG JAR_FILE=target/*.jar
 RUN mkdir /apps
 COPY ${JAR_FILE}  /apps/search-service.jar
