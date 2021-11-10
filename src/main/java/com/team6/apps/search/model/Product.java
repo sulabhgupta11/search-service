@@ -19,11 +19,14 @@ public class Product {
 	@ApiModelProperty(value = "12000", example = "12000")
 	private String price;
 
-	@ApiModelProperty(value = "Image url of the product", example = "C:\\Users\\sulgupta\\Desktop\\Crackdeal Images")
+	@ApiModelProperty(value = "Image url of the product", example = "s3://crackdeal/products/images/Iphone13-pro-1.jpg")
 	private String imageUrl;
 
 	@ApiModelProperty(value = "brand", example = "Apple")
 	private String brand;
+
+	@ApiModelProperty(value = "category", example = "Mobiles")
+	private String category;
 
 	@ApiModelProperty(value = "stock", example = "300")
 	private int stock;
@@ -91,5 +94,13 @@ public class Product {
 
 	public void setStock(int stock) {
 		this.stock = stock;
+	}
+
+	public String getCategory() {
+		return category;
+	}
+
+	public void setCategory(String category) {
+		this.category = category;
 	}
 }
