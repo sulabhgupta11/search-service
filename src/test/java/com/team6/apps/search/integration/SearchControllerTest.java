@@ -57,6 +57,8 @@ public class SearchControllerTest {
 
 	@Before
 	public void setUp() throws InterruptedException{
+		System.setProperty("aws.accessKeyId", "AKIA5IICNMZ5XFEVM76Z");
+		System.setProperty("aws.secretAccessKey", "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");
 		List<Product> products = buildProducts();
 		searchService.indexProducts(products);
 		TimeUnit.SECONDS.sleep(2);
