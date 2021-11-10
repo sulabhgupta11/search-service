@@ -2,6 +2,7 @@ package com.team6.apps.search.security;
 
 import com.team6.apps.search.utils.Constants;
 import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.Jws;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import org.slf4j.Logger;
@@ -9,11 +10,10 @@ import org.slf4j.LoggerFactory;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
+import javax.crypto.spec.SecretKeySpec;
 import javax.servlet.http.HttpServletRequest;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Objects;
+import java.security.Key;
+import java.util.*;
 import java.util.function.Function;
 
 @Component
@@ -65,15 +65,17 @@ public class JwtUtil {
 				.signWith(SignatureAlgorithm.HS256, Constants.SECRET_KEY).compact();
 	}
 
-	public Boolean validateToken(String token, UserDetails userDetails) {
-		final String username = extractUsername(token);
-		System.out.println("Expiration = " + extractExpiration(token));
-		String roles = extractRoles(token);
-		System.out.println(username);
-		System.out.println(roles);
-
-
-		return (username.equals(userDetails.getUsername()) && !isTokenExpired(token));
+	public Boolean validateToken(String token) {
+		try {
+			Key hmacKey = new SecretKeySpec(Base64.getDecoder().decode(Constants.SECRET_KEY),
+					SignatureAlgorithm.HS256.getJcaName());
+			Jws<Claims> jwt = Jwts.parser()
+					.setSigningKey(hmacKey)
+					.parseClaimsJws(token);
+		} catch (Exception e) {
+			return false;
+		}
+		return true;
 	}
 
 	public String resolveToken(HttpServletRequest req) {
