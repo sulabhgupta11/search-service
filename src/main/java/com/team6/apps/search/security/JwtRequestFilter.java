@@ -1,6 +1,8 @@
 package com.team6.apps.search.security;
 
 import io.jsonwebtoken.ExpiredJwtException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.filter.OncePerRequestFilter;
 
@@ -12,6 +14,8 @@ import java.io.IOException;
 
 public class JwtRequestFilter extends OncePerRequestFilter {
 
+	private final Logger logger = LoggerFactory.getLogger(this.getClass());
+
 
 	@Autowired
 	private JwtUtil jwtUtil;
@@ -20,15 +24,16 @@ public class JwtRequestFilter extends OncePerRequestFilter {
 	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain)
 			throws ServletException, IOException {
 		try {
+			logger.info("resolving token");
 			String jwtToken = jwtUtil.resolveToken(request);
+			logger.info("validating token");
 			if (jwtUtil.validateToken(jwtToken)) {
 				chain.doFilter(request, response);
 			}
-//			username = jwtUtil.extractUsername(jwtToken);
 		} catch (IllegalArgumentException e) {
-			System.out.println("Unable to get JWT Token");
+			logger.info("Unable to get JWT Token");
 		} catch (ExpiredJwtException e) {
-			System.out.println("JWT Token has expired");
+			logger.info("JWT Token has expired");
 		}
 
 
