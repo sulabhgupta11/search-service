@@ -33,7 +33,7 @@ public class SearchController {
 	}
 
 	@ApiOperation(value = "Search for the product",response = List.class)
-	@PostMapping("/getProducts")
+	@PostMapping("/getProductsByFilter")
 	public List<Product> getProducts(@RequestBody ProductSearchParameter searchParameter)throws Exception {
 		logger.info("inside /search/getProducts");
 		List<Product> list = productSearchService.findProducts(searchParameter);

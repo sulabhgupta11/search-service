@@ -4,7 +4,7 @@ import com.amazonaws.auth.AWS4Signer;
 import com.amazonaws.auth.AWSCredentialsProvider;
 import com.amazonaws.auth.DefaultAWSCredentialsProviderChain;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.team6.apps.search.constants.Constants;
+import com.team6.apps.search.utils.Constants;
 import com.team6.apps.search.http.AWSSigningInterceptor;
 import org.apache.http.HttpHost;
 import org.apache.http.HttpRequestInterceptor;

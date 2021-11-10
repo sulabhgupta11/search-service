@@ -1,7 +1,6 @@
 package com.team6.apps.search.service.impl;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.team6.apps.search.constants.Constants;
 import com.team6.apps.search.model.Product;
 import com.team6.apps.search.model.ProductSearchParameter;
 import com.team6.apps.search.service.ProductSearchService;

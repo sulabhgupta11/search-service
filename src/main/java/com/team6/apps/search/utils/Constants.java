@@ -1,4 +1,4 @@
-package com.team6.apps.search.constants;
+package com.team6.apps.search.utils;
 
 public interface Constants {
 
@@ -9,5 +9,5 @@ public interface Constants {
 	public static final String PRODUCT_UPDATED_EVENT = "PRODUCT_UPDATED";
 	public static final String ES_SERVICE_NAME = "es";
 	public static final String AWS_REGION = "us-east-1";
-	public static final String PRODUCT_INDEX = "product-index";
+	public static final String SECRET_KEY = "secret";
 }

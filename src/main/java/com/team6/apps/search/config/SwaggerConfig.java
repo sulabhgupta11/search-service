@@ -4,7 +4,9 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import springfox.documentation.builders.RequestHandlerSelectors;
 import springfox.documentation.service.ApiInfo;
+import springfox.documentation.service.BasicAuth;
 import springfox.documentation.service.Contact;
+import springfox.documentation.service.SecurityScheme;
 import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
@@ -32,6 +34,10 @@ public class SwaggerConfig {
 				"Apache License Version 2.0",
 				"https://www.apache.org/licenses/LICENSE-2.0");
 		return apiInfo;
+	}
+
+	private SecurityScheme basicAuthScheme() {
+		return new BasicAuth("basicAuth");
 	}
 
 }

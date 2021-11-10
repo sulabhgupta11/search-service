@@ -2,7 +2,7 @@ package com.team6.apps.search.service;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.team6.apps.search.constants.Constants;
+import com.team6.apps.search.utils.Constants;
 import com.team6.apps.search.model.ProductEventMessage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.annotation.KafkaListener;
