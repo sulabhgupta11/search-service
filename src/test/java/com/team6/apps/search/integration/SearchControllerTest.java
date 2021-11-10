@@ -14,9 +14,11 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.context.annotation.Import;
 import org.springframework.http.MediaType;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
@@ -36,7 +38,9 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = {SearchConfig.class, ProductSearchServiceImpl.class})
 @WebMvcTest(SearchController.class)
-@Import(SearchController.class)
+@Import({SearchController.class, SearchTestConfiguration.class})
+@ActiveProfiles(value = "test")
+@AutoConfigureMockMvc(addFilters = false)
 //@ImportAutoConfiguration
 //@ComponentScan(basePackages = {"com.team6.apps.search.controllers"})
 public class SearchControllerTest {
@@ -69,7 +73,7 @@ public class SearchControllerTest {
 	public void testGetAllProducts() throws Exception {
 		System.out.println("Product Index " + productIndex);
 		mvc.perform(MockMvcRequestBuilders
-				.get("/search/getAllProducts")
+				.get("/getAllProducts")
 				.accept(MediaType.APPLICATION_JSON))
 				.andDo(print())
 				.andExpect(status().isOk())
@@ -80,7 +84,7 @@ public class SearchControllerTest {
 	public void testGetProduct() throws Exception {
 		System.out.println("Product Index " + productIndex);
 		mvc.perform(MockMvcRequestBuilders
-				.post("/search/getProducts")
+				.post("/getProducts")
 				.content(asJsonString(buildProductSearchParameter()))
 				.contentType(MediaType.APPLICATION_JSON)
 				.accept(MediaType.APPLICATION_JSON))
