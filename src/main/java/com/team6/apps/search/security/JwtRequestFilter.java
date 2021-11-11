@@ -3,14 +3,12 @@ package com.team6.apps.search.security;
 import io.jsonwebtoken.Claims;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
-import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import javax.servlet.FilterChain;
@@ -21,14 +19,14 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 
-@Component
 public class JwtRequestFilter extends OncePerRequestFilter {
 
 	private final Logger logger = LoggerFactory.getLogger(this.getClass());
+	private JwtUtil jwtUtil = null;
 
-
-	@Autowired
-	private JwtUtil jwtUtil;
+    public JwtRequestFilter(JwtUtil jwtUtil){
+    	this.jwtUtil = jwtUtil;
+	}
 
 	@Override
 	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain)
