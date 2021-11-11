@@ -3,7 +3,9 @@ package com.team6.apps.search.integration;
 import com.team6.apps.search.config.SearchConfig;
 import com.team6.apps.search.model.Product;
 import com.team6.apps.search.model.ProductSearchParameter;
+import com.team6.apps.search.service.ProductIndexService;
 import com.team6.apps.search.service.ProductSearchService;
+import com.team6.apps.search.service.impl.ProductIndexServiceImpl;
 import com.team6.apps.search.service.impl.ProductSearchServiceImpl;
 import org.junit.After;
 import org.junit.Before;
@@ -25,11 +27,14 @@ import static org.assertj.core.api.BDDAssertions.then;
 //@ThreadLeakScope(ThreadLeakScope.Scope.NONE)
 @TestPropertySource(locations = "classpath:application-test.properties")
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = {SearchConfig.class, ProductSearchServiceImpl.class})
+@ContextConfiguration(classes = {SearchConfig.class, ProductSearchServiceImpl.class, ProductIndexServiceImpl.class})
 public class ProductServiceTest {
 
 	@Autowired
 	private ProductSearchService prodSearchService;
+
+	@Autowired
+	private ProductIndexService prodIndexService;
 
 	@Value("${product.index}")
 	private String productIndex;
@@ -40,14 +45,14 @@ public class ProductServiceTest {
 		System.setProperty("aws.accessKeyId", "AKIA5IICNMZ5XFEVM76Z");
 		System.setProperty("aws.secretAccessKey", "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");
 		List<Product> products = buildProducts();
-		prodSearchService.indexProducts(products);
+		prodIndexService.indexProducts(products);
 		TimeUnit.SECONDS.sleep(2);
 	}
 
 	@After
 	public void tearDown() throws InterruptedException{
 //		System.clearProperty("tests.rest.cluster");
-		prodSearchService.removeIndex(productIndex);
+		prodIndexService.removeIndex(productIndex);
 		TimeUnit.SECONDS.sleep(2);
 	}
 
@@ -69,7 +74,7 @@ public class ProductServiceTest {
 		searchParameter.setSearchText("Apple");
 
 		//WHEN
-		List<Product> searchedProducts = prodSearchService.findProducts(searchParameter);
+		List<Product> searchedProducts = prodSearchService.findProductsByFilter(searchParameter);
 
 		// THEN
 		then(searchedProducts.size() == 1);

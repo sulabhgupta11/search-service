@@ -36,7 +36,7 @@ public class SearchController {
 	@PostMapping("/getProductsByFilter")
 	public List<Product> getProducts(@RequestBody ProductSearchParameter searchParameter)throws Exception {
 		logger.info("inside /search/getProducts");
-		List<Product> list = productSearchService.findProducts(searchParameter);
+		List<Product> list = productSearchService.findProductsByFilter(searchParameter);
 		return list;
 
 	}

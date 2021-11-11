@@ -6,7 +6,9 @@ import com.team6.apps.search.config.SearchConfig;
 import com.team6.apps.search.controllers.SearchController;
 import com.team6.apps.search.model.Product;
 import com.team6.apps.search.model.ProductSearchParameter;
+import com.team6.apps.search.service.ProductIndexService;
 import com.team6.apps.search.service.ProductSearchService;
+import com.team6.apps.search.service.impl.ProductIndexServiceImpl;
 import com.team6.apps.search.service.impl.ProductSearchServiceImpl;
 import org.junit.After;
 import org.junit.Before;
@@ -36,7 +38,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @TestPropertySource(locations = "classpath:application-test.properties")
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = {SearchConfig.class, ProductSearchServiceImpl.class})
+@ContextConfiguration(classes = {SearchConfig.class, ProductSearchServiceImpl.class, ProductIndexServiceImpl.class})
 @WebMvcTest(SearchController.class)
 @Import({SearchController.class, SearchTestConfiguration.class})
 @ActiveProfiles(value = "test")
@@ -51,6 +53,9 @@ public class SearchControllerTest {
 	@Autowired
 	private ProductSearchService searchService;
 
+	@Autowired
+	private ProductIndexService prodIndexService;
+
 	@Value("${product.index}")
 	private String productIndex;
 
@@ -60,13 +65,13 @@ public class SearchControllerTest {
 		System.setProperty("aws.accessKeyId", "AKIA5IICNMZ5XFEVM76Z");
 		System.setProperty("aws.secretAccessKey", "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");
 		List<Product> products = buildProducts();
-		searchService.indexProducts(products);
+		prodIndexService.indexProducts(products);
 		TimeUnit.SECONDS.sleep(2);
 	}
 
 	@After
 	public void tearDown() throws InterruptedException{
-         searchService.removeIndex(productIndex);
+		prodIndexService.removeIndex(productIndex);
          TimeUnit.SECONDS.sleep(2);
 	}
 

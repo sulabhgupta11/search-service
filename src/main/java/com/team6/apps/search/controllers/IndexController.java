@@ -1,6 +1,7 @@
 package com.team6.apps.search.controllers;
 
 import com.team6.apps.search.model.Product;
+import com.team6.apps.search.service.ProductIndexService;
 import com.team6.apps.search.service.ProductSearchService;
 import io.swagger.annotations.Api;
 import org.slf4j.Logger;
@@ -18,26 +19,26 @@ public class IndexController {
 	private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
 	@Autowired
-	private ProductSearchService productSearchService;
+	private ProductIndexService productIndexService;
 
 	@PostMapping("/product")
 	public Boolean indexProducts(@RequestBody Product product) throws Exception {
 		logger.info("inside /index/product");
-		return productSearchService.indexProduct(product);
+		return productIndexService.indexProduct(product);
 
 	}
 
 	@PostMapping("/products")
 	public Boolean indexProducts(@RequestBody List<Product> products) throws Exception {
 		logger.info("inside /index/products");
-		return productSearchService.indexProducts(products);
+		return productIndexService.indexProducts(products);
 
 	}
 
 	@PostMapping("/removeIndex")
 	public Boolean indexProducts(@RequestParam String index) throws Exception {
 		logger.info("inside /index/removeIndex");
-		return productSearchService.removeIndex(index);
+		return productIndexService.removeIndex(index);
 
 	}
 }
