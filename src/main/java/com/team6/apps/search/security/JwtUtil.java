@@ -1,13 +1,11 @@
 package com.team6.apps.search.security;
 
 import com.team6.apps.search.utils.Constants;
-import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.Jws;
-import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
+import io.jsonwebtoken.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.stereotype.Component;
 
 import javax.crypto.spec.SecretKeySpec;
@@ -65,17 +63,22 @@ public class JwtUtil {
 				.signWith(SignatureAlgorithm.HS256, Constants.SECRET_KEY).compact();
 	}
 
-	public Boolean validateToken(String token) {
+	public Claims validateToken(String token) throws JwtException {
 		try {
-			Key hmacKey = new SecretKeySpec(Base64.getDecoder().decode(Constants.SECRET_KEY),
-					SignatureAlgorithm.HS256.getJcaName());
-			Jws<Claims> jwt = Jwts.parser()
-					.setSigningKey(hmacKey)
-					.parseClaimsJws(token);
+			Claims claims = extractAllClaims(token);
+			logger.info("ID: " + claims.getId());
+			logger.info("Subject: " + claims.getSubject());
+			logger.info("Issuer: " + claims.getIssuer());
+			logger.info("Expiration: " + claims.getExpiration());
+			return claims;
 		} catch (Exception e) {
-			return false;
+			if (isTokenExpired(token)) {
+				logger.info("token is expired");
+				throw new JwtException("Token is expired");
+			}
+			logger.info("Error parsing token.  Token is invalid");
+			throw new JwtException("Token is invalid");
 		}
-		return true;
 	}
 
 	public String resolveToken(HttpServletRequest req) {
