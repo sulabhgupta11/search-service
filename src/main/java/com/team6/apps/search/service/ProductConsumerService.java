@@ -18,6 +18,9 @@ public class ProductConsumerService {
 	@Autowired
 	private ProductSearchService productSearchService;
 
+	@Autowired
+	private ProductIndexService productIndexService;
+
 
 	@KafkaListener(topics = Constants.PRODUCT_TOPIC_NAME, groupId = Constants.PRODUCT_CONSUMER_GROUP)
 	public void consume(String message) {
@@ -25,9 +28,9 @@ public class ProductConsumerService {
 		try {
 			ProductEventMessage eventMessage = objectMapper.readValue(message, ProductEventMessage.class);
 			if (eventMessage.getEventType().equals(Constants.PRODUCT_ADDED_EVENT) || eventMessage.getEventType().equals(Constants.PRODUCT_UPDATED_EVENT)) {
-				productSearchService.indexProduct(eventMessage.getProduct());
+				productIndexService.indexProduct(eventMessage.getProduct());
 			} else if (eventMessage.getEventType().equals(Constants.PRODUCT_REMOVED_EVENT)) {
-				productSearchService.removeProduct(eventMessage.getProduct());
+				productIndexService.removeProduct(eventMessage.getProduct());
 			}
 		} catch (JsonProcessingException e) {
 			e.printStackTrace();
