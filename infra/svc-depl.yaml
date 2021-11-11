@@ -16,6 +16,13 @@ spec:
       containers:
       - name: search-srv
         image: CONTAINER_IMAGE
+        resources:
+          limits:
+            memory: "512Mi"
+            cpu: "500m"
+          requests:
+             memory: "512Mi"
+             cpu: "500m"
 ---
 apiVersion: v1
 kind: Service
