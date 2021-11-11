@@ -86,7 +86,7 @@ public class SearchControllerTest {
 	public void testGetProduct() throws Exception {
 		System.out.println("Product Index " + productIndex);
 		mvc.perform(MockMvcRequestBuilders
-				.post("/getProducts")
+				.post("/getProductsByFilter")
 				.content(asJsonString(buildProductSearchParameter()))
 				.contentType(MediaType.APPLICATION_JSON)
 				.accept(MediaType.APPLICATION_JSON))
