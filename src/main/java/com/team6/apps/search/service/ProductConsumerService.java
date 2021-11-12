@@ -30,7 +30,7 @@ public class ProductConsumerService {
 			if (eventMessage.getEventType().equals(Constants.PRODUCT_ADDED_EVENT) || eventMessage.getEventType().equals(Constants.PRODUCT_UPDATED_EVENT)) {
 				productIndexService.indexProduct(eventMessage.getProduct());
 			} else if (eventMessage.getEventType().equals(Constants.PRODUCT_REMOVED_EVENT)) {
-				productIndexService.removeProduct(eventMessage.getProduct());
+				productIndexService.removeProduct(eventMessage.getProduct().getId());
 			}
 		} catch (JsonProcessingException e) {
 			e.printStackTrace();
