@@ -21,22 +21,29 @@ public class IndexController {
 	@Autowired
 	private ProductIndexService productIndexService;
 
-	@PostMapping("/product")
-	public Boolean indexProducts(@RequestBody Product product) throws Exception {
-		logger.info("inside /index/product");
+	@PostMapping("/addProduct")
+	public Boolean indexProduct(@RequestBody Product product) throws Exception {
+		logger.info("inside /index/addProduct");
 		return productIndexService.indexProduct(product);
 
 	}
 
-	@PostMapping("/products")
+	@PostMapping("/addProducts")
 	public Boolean indexProducts(@RequestBody List<Product> products) throws Exception {
-		logger.info("inside /index/products");
+		logger.info("inside /index/addProducts");
 		return productIndexService.indexProducts(products);
 
 	}
 
+	@PostMapping("/removeProduct")
+	public Boolean removeProduct(@RequestParam String productId) throws Exception {
+		logger.info("inside /index/removeProduct");
+		return productIndexService.removeProduct(productId);
+
+	}
+
 	@PostMapping("/removeIndex")
-	public Boolean indexProducts(@RequestParam String index) throws Exception {
+	public Boolean remoceIndex(@RequestParam String index) throws Exception {
 		logger.info("inside /index/removeIndex");
 		return productIndexService.removeIndex(index);
 

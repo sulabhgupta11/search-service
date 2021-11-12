@@ -109,9 +109,9 @@ public class ProductIndexServiceImpl implements ProductIndexService {
 
 
 	@Override
-	public Boolean removeProduct(Product product) {
+	public Boolean removeProduct(String id) {
 		try {
-			DeleteRequest deleteRequest = new DeleteRequest(productIndex, type, product.getId());
+			DeleteRequest deleteRequest = new DeleteRequest(productIndex, type, id);
 			final DeleteResponse response = client.delete(deleteRequest, RequestOptions.DEFAULT);
 			return response != null && response.status().equals(RestStatus.OK);
 		} catch (final Exception e) {
