@@ -17,7 +17,7 @@ public class Product {
 	private String color;
 
 	@ApiModelProperty(value = "12000", example = "12000")
-	private String price;
+	private Integer price;
 
 	@ApiModelProperty(value = "Image url of the product", example = "s3://crackdeal/products/images/Iphone13-pro-1.jpg")
 	private String imageUrl;
@@ -64,12 +64,16 @@ public class Product {
 		this.color = color;
 	}
 
-	public String getPrice() {
+	public Integer getPrice() {
 		return price;
 	}
 
-	public void setPrice(String price) {
+	public void setPrice(Integer price) {
 		this.price = price;
+	}
+
+	public void setPrice(String price) {
+		this.price = Integer.valueOf(price);
 	}
 
 	public String getImageUrl() {

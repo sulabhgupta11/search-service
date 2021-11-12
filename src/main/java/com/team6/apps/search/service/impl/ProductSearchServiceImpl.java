@@ -53,7 +53,7 @@ public class ProductSearchServiceImpl implements ProductSearchService {
 				.collect(Collectors.groupingBy(ProductSearchParameter.Filter::getKey));
 		for (Map.Entry<String, List<ProductSearchParameter.Filter>> entry : byKey.entrySet()) {
 			BoolQueryBuilder orQueryBuilder = QueryBuilders.boolQuery();
-			entry.getValue().forEach(filter -> orQueryBuilder.should(filter.toQuery()));
+			entry.getValue().forEach(filter -> orQueryBuilder.should(filter.toQuery()).minimumShouldMatch("100%"));
 			boolQueryBuilder.must(orQueryBuilder);
 		}
 		SearchSourceBuilder searchSourceBuilder = new SearchSourceBuilder();

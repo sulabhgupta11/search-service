@@ -54,9 +54,9 @@ public class ProductSearchParameter {
 		@ApiModelProperty(value = "vivo", example = "vivo")
 		private String value;
 		@ApiModelProperty(value = "5000", example = "5000")
-		private String from;
+		private Integer from;
 		@ApiModelProperty(value = "15000", example = "15000")
-		private String to;
+		private Integer to;
 		@ApiModelProperty(value = "range", example = "range")
 		private String type;
 
@@ -64,12 +64,20 @@ public class ProductSearchParameter {
 			return type;
 		}
 
-		public String getFrom() {
+		public Integer getFrom() {
 			return from;
 		}
 
-		public String getTo() {
+		public void setFrom(Integer from) {
+			this.from = from;
+		}
+
+		public Integer getTo() {
 			return to;
+		}
+
+		public void setTo(Integer to) {
+			this.to = to;
 		}
 
 		public String getKey() {
@@ -90,12 +98,12 @@ public class ProductSearchParameter {
 			}
 		}
 
-		private RangeQueryBuilder createRangeQueryBuilder(String name, String from, String to) {
+		private RangeQueryBuilder createRangeQueryBuilder(String name, Integer from, Integer to) {
 			RangeQueryBuilder rangeQueryBuilder = QueryBuilders.rangeQuery(name);
-			if (StringUtils.isEmpty(from) == false) {
+			if (from != null) {
 				rangeQueryBuilder.from(from);
 			}
-			if (StringUtils.isEmpty(to) == false) {
+			if (to != null) {
 				rangeQueryBuilder.to(to);
 			}
 			return rangeQueryBuilder;
