@@ -7,11 +7,12 @@ spec:
   replicas: 1
   selector:
     matchLabels:
-      app: crackdeal
+      app: search-app
   template:
     metadata:
       labels:
-        app: crackdeal
+        app: search-app
+        version: "1.0.0"
     spec:
       containers:
       - name: search-srv
@@ -31,7 +32,7 @@ metadata:
   namespace: crackdeal-ns
 spec:
   selector:
-    app: crackdeal
+    app: search-app
   ports:
   - port: 8082
     targetPort: 8082
