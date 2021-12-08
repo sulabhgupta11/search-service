@@ -19,10 +19,10 @@ spec:
         image: CONTAINER_IMAGE
         resources:
           limits:
-            memory: "512Mi"
+            memory: "250Mi"
             cpu: "500m"
           requests:
-             memory: "512Mi"
+             memory: "250Mi"
              cpu: "500m"
 ---
 apiVersion: v1
