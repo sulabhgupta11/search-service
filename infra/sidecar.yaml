@@ -4,10 +4,8 @@ metadata:
   name: search-route
   namespace: crackdeal-ns
 spec:
-  gateways:
-  - crackdeal-gateway
   hosts:
-   - "*"
+   - "search-srv.crackdeal-ns.svc.cluster.local"
   http:
   - name: search-stable-route
     match:
