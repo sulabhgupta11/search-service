@@ -1,0 +1,35 @@
+[
+  {
+    "id": "Iphone13-pro-1",
+    "name": "Iphone13-pro-silver-6GB",
+    "description": "256GB 6GB RAM",
+    "color": "Green",
+    "price": 45000,
+    "imageUrl": "https://crackdeal.s3.amazonaws.com/products/images/Iphone13-pro-1.jpg",
+    "brand": "Apple",
+    "category": "Mobile",
+    "stock": 0
+  },
+  {
+    "id": "Iphone13-pro-2",
+    "name": "Iphone13-pro-black-6GB",
+    "description": "256GB 6GB RAM",
+    "color": "White",
+    "price": 45000,
+    "imageUrl": "https://crackdeal.s3.amazonaws.com/products/images/Iphone13-pro-2.jpg",
+    "brand": "Apple",
+    "category": "Mobile",
+    "stock": 0
+  },
+  {
+    "id": "Samsung-M31-3",
+    "name": "Samsung-M31-White-6GB",
+    "description": "256GB 6GB RAM",
+    "color": "White",
+    "price": 18000,
+    "imageUrl": "https://crackdeal.s3.amazonaws.com/products/images/Samsung-M31-3.jpg",
+    "brand": "Samsung",
+    "category": "Mobiles",
+    "stock": 0
+  }
+]
