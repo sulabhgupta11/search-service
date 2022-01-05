@@ -31,12 +31,12 @@
     </appender>
 
     <logger name="com.team6.apps.search" level="debug" additivity="false">
-        <appender-ref ref="CONSOLE"/>
+<!--        <appender-ref ref="CONSOLE"/>-->
         <appender-ref ref="FILE-ROLLING"/>
     </logger>
 
     <root level="warn">
-        <appender-ref ref="CONSOLE"/>
+<!--        <appender-ref ref="CONSOLE"/>-->
         <appender-ref ref="FILE-ROLLING"/>
     </root>
 </configuration>

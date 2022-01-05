@@ -14,6 +14,8 @@ import org.apache.kafka.common.config.SslConfigs;
 import org.apache.kafka.common.serialization.StringDeserializer;
 import org.elasticsearch.client.RestClient;
 import org.elasticsearch.client.RestHighLevelClient;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -37,8 +39,11 @@ public class SearchConfig {
 	@Value("${es.product.domain.endpoint}")
 	private String productDomainEndpoint;
 
+	private final Logger logger = LoggerFactory.getLogger(this.getClass());
+
 	@Bean
 	public ConsumerFactory<String, String> consumerFactory() {
+		logger.info("Initiating Kafka consumer factory");
 		Map<String, Object> props = new HashMap<>();
 		props.put(CommonClientConfigs.SECURITY_PROTOCOL_CONFIG, "SSL");
 		props.put(SslConfigs.SSL_TRUSTSTORE_LOCATION_CONFIG, trustStorePath);
@@ -70,6 +75,7 @@ public class SearchConfig {
 	// Adds the interceptor to the OpenSearch REST client
 	@Bean
 	public RestHighLevelClient productSearchClient() {
+		logger.info("Instantiating product search client");
 		AWSCredentialsProvider credentialsProvider = new DefaultAWSCredentialsProviderChain();
 		AWS4Signer signer = new AWS4Signer();
 		signer.setServiceName(Constants.ES_SERVICE_NAME);
